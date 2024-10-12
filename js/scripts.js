@@ -1,9 +1,14 @@
-let currentPokemon = 650; // Início da 6ª geração
+let currentPokemon = 1; // Início
 
 async function fetchPokemonData(pokemonId) {
     try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
         const pokemonData = await response.json();
+
+        // Cálculo da média de status
+        const stats = pokemonData.stats;
+        const totalStats = stats.reduce((sum, stat) => sum + stat.base_stat, 0);
+        const averageStats = (totalStats / stats.length).toFixed(2); // Média com duas casas decimais
 
         // Aplica fade out antes de atualizar
         const pokemonInfo = document.getElementById('pokemon-info');
@@ -15,9 +20,11 @@ async function fetchPokemonData(pokemonId) {
             document.getElementById('name').innerText = `Nome: ${capitalize(pokemonData.name)}`;
             document.getElementById('national-dex').innerText = `Número: ${pokemonData.id}`;
             document.getElementById('sprite').src = pokemonData.sprites.front_default;
+            document.getElementById('sprite-back').src = pokemonData.sprites.back_default; // Adicione esta linha
             document.getElementById('type').innerText = `Tipo: ${pokemonData.types.map(type => capitalize(type.type.name)).join(', ')}`;
             document.getElementById('ability').innerText = `Habilidade: ${capitalize(pokemonData.abilities[0].ability.name)}`;
-            
+            document.getElementById('average-status').innerText = `Média de Status: ${averageStats}`; // Atualiza a média
+
             // Limpa os spans de tipos anteriores
             const typeContainer = document.getElementById('type');
             typeContainer.innerHTML = ''; 
@@ -44,6 +51,7 @@ async function fetchPokemonData(pokemonId) {
     }
 }
 
+
 function playCry() {
     const cryUrl = document.getElementById('cry').dataset.cryUrl;
     const audio = new Audio(cryUrl);
@@ -51,14 +59,14 @@ function playCry() {
 }
 
 function previousPokemon() {
-    if (currentPokemon > 650) {
+    if (currentPokemon > 1) {
         currentPokemon--;
         fetchPokemonData(currentPokemon);
     }
 }
 
 function nextPokemon() {
-    if (currentPokemon < 721) {
+    if (currentPokemon < 1025) {
         currentPokemon++;
         fetchPokemonData(currentPokemon);
     }
@@ -66,11 +74,11 @@ function nextPokemon() {
 
 function goToPokemon() {
     const searchNumber = document.getElementById('searchNumber').value;
-    if (searchNumber >= 650 && searchNumber <= 721) {
+    if (searchNumber >= 1 && searchNumber <= 1025) {
         currentPokemon = searchNumber;
         fetchPokemonData(currentPokemon);
     } else {
-        alert("Digite um número entre 650 e 721.");
+        alert("Digite um número entre 1 e 1025.");
     }
 }
 
@@ -79,11 +87,11 @@ async function searchPokemon() {
     try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchInput}`);
         const pokemonData = await response.json();
-        if (pokemonData.id >= 650 && pokemonData.id <= 721) {
+        if (pokemonData.id >= 1 && pokemonData.id <= 1025) {
             currentPokemon = pokemonData.id;
             fetchPokemonData(currentPokemon);
         } else {
-            alert('Este Pokémon não pertence à 6ª Geração.');
+            alert('Este Pokémon não existe.');
         }
     } catch (error) {
         alert('Pokémon não encontrado.');
@@ -98,4 +106,10 @@ function capitalize(str) {
 // Carrega o primeiro Pokémon ao iniciar a página
 window.onload = () => {
     fetchPokemonData(currentPokemon);
-};
+
+    document.getElementById('searchInput').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            searchPokemon(); // Chama a função de pesquisa
+        }
+    })
+}
