@@ -1,5 +1,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
 
+/* responsividade: */
+@media (max-width: 768px) {
+    .pokedex {
+        width: 90%; /* Largura ajustada para 90% */
+        max-width: 400px; /* Limita a largura máxima */
+    }
+
+    .sprites {
+        flex-direction: column; /* Coloca os sprites um em cima do outro */
+    }
+
+    .pokedex-screen img {
+        width: 120px; /* Diminuindo o tamanho das imagens */
+        height: 120px;
+    }
+
+    .search, .search-by-number {
+        flex-direction: column; /* Coloca os elementos um em cima do outro */
+        align-items: center; /* Centraliza os elementos */
+    }
+
+    input[type="text"], input[type="number"] {
+        width: 100%; /* Faz os inputs ocuparem toda a largura */
+        margin-bottom: 10px; /* Espaço entre os inputs */
+    }
+}
+
+/* Ajustes para celulares */
+@media (max-width: 480px) {
+    .pokedex {
+        width: 95%; /* Largura ajustada para 95% em telas pequenas */
+    }
+
+    .pokedex h1 {
+        font-size: 20px; /* Reduz o tamanho do título */
+    }
+
+    .indicator {
+        font-size: 14px; /* Reduz o tamanho da fonte dos indicadores */
+    }
+
+    .btn {
+        padding: 8px; /* Ajusta o padding dos botões */
+        font-size: 14px; /* Reduz o tamanho da fonte dos botões */
+    }
+
+    .search, .search-by-number, .controls {
+        flex-direction: column; /* Coloca os botões em coluna */
+        align-items: center; /* Centraliza os botões */
+    }
+}
+
+
 body {
     background: rgb(255,236,238);
     background: linear-gradient(142deg, rgba(255,236,238,1) 0%, rgba(223,245,255,1) 80%);
