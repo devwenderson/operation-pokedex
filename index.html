@@ -3,10 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokedex</title>
+    <title>Pokédex XY</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <h1>Hello word!</h1>
+    <div class="pokedex">
+        <h1>Pokédex XY - 6ª Geração</h1>
+        <div class="search">
+            <input type="text" id="searchInput" placeholder="Buscar por nome ou tipo...">
+            <button onclick="searchPokemon()">Buscar</button>
+        </div>
+        <div class="search-by-number">
+            <input type="number" id="searchNumber" placeholder="Nº da National Dex (650-721)" min="650" max="721">
+            <button onclick="goToPokemon()">Ir</button>
+        </div>
+        <div class="pokedex-screen">
+            <div id="pokemon-info" class="fade">
+                <img id="sprite" src="" alt="Pokemon Sprite">
+                <p id="name">Nome: </p>
+                <p id="national-dex">Número: </p>
+                <p id="type">Tipo: </p>
+                <p id="ability">Habilidade: </p>
+                <p id="cry">Choro: <button onclick="playCry()">Ouvir</button></p>
+            </div>
+        </div>
+        <div class="controls">
+            <button onclick="previousPokemon()">Anterior</button>
+            <button onclick="nextPokemon()">Próximo</button>
+        </div>
+    </div>
+    
+    <script src="js/scripts.js"></script>
 </body>
 </html>
