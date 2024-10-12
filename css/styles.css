@@ -1,87 +1,109 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: 0;
-}
 
 body {
-    background-color: #f3f3f3;
+    background-color: #f0f0f0;
     font-family: 'Comfortaa', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
 .pokedex {
-    width: 300px;
-    margin: 50px auto;
+    width: 400px;
+    background-color: #fff;
+    border-radius: 20px;
     padding: 20px;
-    border: 5px solid #ff2b2b;
-    border-radius: 15px;
-    background-color: #c4e1ff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     text-align: center;
 }
 
 .pokedex h1 {
-    color: #ff2b2b;
     font-size: 24px;
+    color: #333;
     margin-bottom: 20px;
-}
-
-.search, .search-by-number {
-    margin-bottom: 15px;
-}
-
-input[type="text"], input[type="number"] {
-    padding: 5px;
-    width: 180px;
-    border: 2px solid #ff2b2b;
-    border-radius: 5px;
-}
-
-button {
-    background-color: #ff2b2b;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 5px;
-}
-
-button:hover {
-    background-color: #ff4d4d;
 }
 
 .pokedex-screen {
-    border: 3px solid #ff2b2b;
-    padding: 15px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    height: 300px;
-    margin-bottom: 20px;
+    border: 2px solid #ccc;
+    border-radius: 15px;
+    padding: 20px;
+    background-color: #f9f9f9;
     position: relative;
+    height: 350px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .pokedex-screen img {
     width: 150px;
     height: 150px;
-    transition: opacity 0.5s ease;
+    object-fit: contain;
+    margin-bottom: 20px;
 }
 
-.fade {
-    opacity: 0;
-    transition: opacity 0.5s ease;
+.pokemon-details p {
+    font-size: 16px;
+    color: #333;
+    margin: 5px 0;
 }
 
-.show {
-    opacity: 1;
+.search, .search-by-number {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+input[type="text"], input[type="number"] {
+    padding: 10px;
+    width: 70%;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    outline: none;
+    font-size: 14px;
+}
+
+.btn {
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+.btn-cry {
+    padding: 5px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-cry:hover {
+    background-color: #0b7dda;
 }
 
 .controls {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
-#name, #national-dex, #type, #ability, #cry {
-    font-size: 16px;
-    margin: 10px 0;
+.fade {
+    opacity: 0;
+    transition: opacity 0.9s ease;
+}
+
+.show {
+    opacity: 1;
 }
