@@ -1,29 +1,40 @@
-let currentPokemon = 650; // Início da 6ª geração, é eu diminuí o escopo pra gen 6º
+let currentPokemon = 650; // Início da 6ª geração
 
-//Essa função faz uma requisição assíncrona
 async function fetchPokemonData(pokemonId) {
     try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
         const pokemonData = await response.json();
 
-        //fade out antes de atualizar
+        // Aplica fade out antes de atualizar
         const pokemonInfo = document.getElementById('pokemon-info');
         pokemonInfo.classList.remove('show');
         pokemonInfo.classList.add('fade');
 
         setTimeout(() => {
-            // informações na Pokédex
+            // Atualizando informações na Pokédex
             document.getElementById('name').innerText = `Nome: ${capitalize(pokemonData.name)}`;
             document.getElementById('national-dex').innerText = `Número: ${pokemonData.id}`;
             document.getElementById('sprite').src = pokemonData.sprites.front_default;
             document.getElementById('type').innerText = `Tipo: ${pokemonData.types.map(type => capitalize(type.type.name)).join(', ')}`;
             document.getElementById('ability').innerText = `Habilidade: ${capitalize(pokemonData.abilities[0].ability.name)}`;
             
-            //link do cry
+            // Limpa os spans de tipos anteriores
+            const typeContainer = document.getElementById('type');
+            typeContainer.innerHTML = ''; 
+            
+            // Adiciona cada tipo com um span colorido
+            pokemonData.types.forEach(type => {
+                const typeSpan = document.createElement('span');
+                typeSpan.classList.add('type', `type-${type.type.name}`);
+                typeSpan.innerText = capitalize(type.type.name);
+                typeContainer.appendChild(typeSpan);
+            });
+
+            // Guardando o link do choro
             const cryUrl = `https://play.pokemonshowdown.com/audio/cries/${pokemonData.name}.mp3`;
             document.getElementById('cry').dataset.cryUrl = cryUrl;
 
-            // fade in após atualizar
+            // Aplica fade in após atualizar
             pokemonInfo.classList.remove('fade');
             pokemonInfo.classList.add('show');
         }, 500);
@@ -79,12 +90,12 @@ async function searchPokemon() {
     }
 }
 
-// Capitaliza a primeira letra do nome pra formatar de forma mais bonitinha
+// Capitaliza a primeira letra do nome
 function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-//Carrega o primeiro Pokémon ao iniciar a página
+// Carrega o primeiro Pokémon ao iniciar a página
 window.onload = () => {
     fetchPokemonData(currentPokemon);
 };
